@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import React from 'react';
 import Router from 'next/router';
 import axios from 'axios';
-import debounce from 'lodash/debounce';
 
 const KEY_CODES = {
   DOWN: 40,
@@ -10,51 +9,70 @@ const KEY_CODES = {
   UP: 38
 };
 
-export default function SearchBox({ q, placeholder }) {
-  const inputRef = React.createRef();
-  const [query, setQuery] = useState(q);
-  const [suggestions, setSuggestions] = useState([]);
-  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [userInput, setUserInput] = useState();
+class SearchBox extends React.Component {
+  constructor(props) {
+    super(props);
 
-  function revertToUserInput() {
-    setQuery(userInput);
-    setSelectedSuggestionIndex(-1);
+    this.inputRef = React.createRef();
+
+    // Bind this
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
+    this.state = {
+      query: null,
+      suggestions: [],
+      selectedSuggestionIndex: -1,
+      showSuggestions: false
+    };
   }
 
-  function resetSuggestions() {
-    setSuggestions([]);
-    setSelectedSuggestionIndex(-1);
-    setShowSuggestions(false);
+  revertToUserInput() {
+    this.setState({ query: this.state.userInput, selectedSuggestionIndex: -1 });
   }
 
-  function selectSuggestion(index) {
-    setSelectedSuggestionIndex(index);
-    setQuery(suggestions[index]);
+  resetSuggestions() {
+    this.setState({ suggestions: [], selectedSuggestionIndex: -1, showSuggestions: false });
   }
 
-  async function handleChange(e) {
-    const q = e.target.value;
+  selectSuggestion(index) {
+    this.setState({ selectedSuggestionIndex: index, query: this.state.suggestions[index] });
+  }
 
-    setQuery(q);
-    setUserInput(q);
-    setShowSuggestions(true);
+  async handleChange(e) {
+    const query = e.target.value;
+    const userInput = query;
+
+    // Start showing suggestions if they've been turned off
+    this.setState({ showSuggestions: true });
+
+    // Update query immediately
+    this.setState({ query: query, userInput: userInput });
 
     // Only fetch suggestions when there's a query
-    if (q.length) {
-      const response = await axios('/api/suggestions', { params: { q } });
+    if (query.length) {
+      // TODO: Debounce this request
+      const response = await axios('/api/suggestions', {
+        params: { q: query }
+      });
 
-      // TODO: Only update the suggestions if the query still matches
-      setSuggestions(response.data[1]);
+      // Only update the suggestions if the query still matches
+      if (this.state.showSuggestions && this.state.query === response.data[0]) {
+        // Update suggestions
+        this.setState({ suggestions: response.data[1] });
+      }
     }
     // Reset suggestions if there's no query
     else {
-      setSuggestions([]);
+      this.setState({ suggestions: [] });
     }
   }
 
-  function handleKeyDown(e) {
+  handleKeyDown(e) {
+    let { suggestions, selectedSuggestionIndex, query } = this.state;
+
     if (query?.length) {
       // Up arrow: decrement the index
       if (e.keyCode === KEY_CODES.UP) {
@@ -63,13 +81,13 @@ export default function SearchBox({ q, placeholder }) {
 
         // Wrap around to the end
         if (selectedSuggestionIndex === -1) {
-          selectSuggestion(suggestions.length - 1);
+          this.selectSuggestion(suggestions.length - 1);
         }
         // Select the input box
         else if (selectedSuggestionIndex === 0) {
-          revertToUserInput();
+          this.revertToUserInput();
         } else {
-          selectSuggestion(selectedSuggestionIndex - 1);
+          this.selectSuggestion(selectedSuggestionIndex - 1);
         }
       }
       // Down arrow: increment the index
@@ -79,84 +97,90 @@ export default function SearchBox({ q, placeholder }) {
 
         // Select in the input box
         if (selectedSuggestionIndex === suggestions.length - 1) {
-          revertToUserInput();
+          this.revertToUserInput();
         } else {
-          selectSuggestion(selectedSuggestionIndex + 1);
+          this.selectSuggestion(selectedSuggestionIndex + 1);
         }
       }
       // Esc: reset values
       else if (e.keyCode === KEY_CODES.ESC) {
-        revertToUserInput();
+        this.revertToUserInput();
       }
     }
   }
 
-  function handleClick(e) {
-    const q = e.currentTarget.innerText;
+  handleClick(e) {
+    const query = e.currentTarget.innerText;
 
-    setQuery(q);
-    setUserInput(q);
+    this.setState({ query: query, userInput: query });
 
-    pushRoute(q);
+    this.pushRoute(query);
   }
 
-  function handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
 
-    inputRef.current.blur();
+    this.inputRef.current.blur();
 
-    pushRoute(query);
+    this.pushRoute(this.state.query);
   }
 
-  function pushRoute(q) {
-    resetSuggestions();
+  pushRoute(q) {
+    this.resetSuggestions();
 
     Router.push({ pathname: '/search', query: { q: q } });
   }
 
-  let suggestionsComponent;
+  render() {
+    const { suggestions, selectedSuggestionIndex } = this.state;
+    const query = this.state.query !== null ? this.state.query : this.props.query;
 
-  if (query?.length && suggestions.length) {
-    suggestionsComponent = (
-      <ul className="suggestions">
-        {suggestions.map((suggestion, index) => {
-          let className;
+    let suggestionsComponent;
 
-          // Flag the active suggestion with a class
-          if (index === selectedSuggestionIndex) {
-            className = 'selected';
-          }
+    if (query?.length && suggestions.length) {
+      suggestionsComponent = (
+        <ul className="suggestions">
+          {suggestions.map((suggestion, index) => {
+            let className;
 
-          return (
-            <li className={className} key={suggestion} onClick={handleClick}>
-              {suggestion}
-            </li>
-          );
-        })}
-      </ul>
+            // Flag the active suggestion with a class
+            if (index === selectedSuggestionIndex) {
+              className = 'selected';
+            }
+
+            return (
+              <li className={className} key={suggestion} onClick={this.handleClick}>
+                {suggestion}
+              </li>
+            );
+          })}
+        </ul>
+      );
+    }
+
+    return (
+      <form className="searchBox" onSubmit={this.handleSubmit}>
+        <input
+          ref={this.inputRef}
+          placeholder={this.props.placeholder}
+          onChange={this.handleChange}
+          onKeyDown={this.handleKeyDown}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
+          value={query}
+        />
+        <button type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z" />
+          </svg>
+        </button>
+        {suggestionsComponent}
+      </form>
     );
   }
-
-  return (
-    <form className="searchBox" onSubmit={handleSubmit}>
-      <input
-        ref={inputRef}
-        placeholder={placeholder}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        autoComplete="off"
-        autoCorrect="off"
-        autoCapitalize="off"
-        spellCheck="false"
-        value={query}
-      />
-      <button type="submit">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z" />
-        </svg>
-      </button>
-      {suggestionsComponent}
-    </form>
-  );
 }
+
+export default SearchBox;

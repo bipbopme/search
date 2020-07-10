@@ -9,7 +9,7 @@ export default function SearchPage({ q, results }) {
   return (
     <Layout className="searchPage" title={`${q || ''} - bipbop`}>
       <Header>
-        <SearchBox q={q} />
+        <SearchBox query={q} />
       </Header>
       {results && (
         <div className="results">
