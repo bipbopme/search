@@ -10,6 +10,18 @@
   "dependencies": {
     "next": "9.4.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
+    "lodash": "^4.17.19",
+    "prettier": "2.0.5",
+    "redis": "^3.0.2",
+    "sanitize-html": "^1.27.0"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "none",
+    "arrowParens": "avoid",
+    "singleQuote": true
   }
 }
