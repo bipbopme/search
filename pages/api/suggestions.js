@@ -19,9 +19,7 @@ const suggestAndTransform = memoize(async params => {
 }, 'suggestAndTransform-v1');
 
 export default async (req, res) => {
-  console.time('suggestions');
   const results = await suggestAndTransform(req.query);
-  console.timeEnd('suggestions');
 
   // preache the top search suggestions
   const topSuggestion = results[1]?.[0];

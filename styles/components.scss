@@ -1,0 +1,301 @@
+// === Computation ===
+
+.computationList {
+  margin-bottom: $spacing-default;
+}
+
+.computationItem {
+  border: $border-width solid $border-color;
+  border-radius: $border-radius;
+  padding: $spacing-half;
+
+  h3 {
+    font-size: $font-size-xlarge;
+  }
+}
+
+// === Entity ===
+
+.entityItem {
+  margin-bottom: $spacing-default;
+  overflow: auto;
+  padding: 0 $spacing-half;
+
+  h3 {
+    a {
+      color: inherit;
+    }
+  }
+
+  &.scenarioDominantEntity {
+    h3 {
+      font-size: $font-size-xlarge;
+      margin-bottom: $spacing-default;
+    }
+
+    .description {
+      @include line-clamp(8);
+    }
+  }
+
+  &.scenarioDisambiguationItem {
+    border-top: $border-width solid #eee;
+    padding-top: $spacing-default;
+
+    h3 {
+      // TODO: variable
+      font-size: $font-size-small;
+      font-weight: bold;
+    }
+
+    .description {
+      @include line-clamp(3);
+    }
+  }
+
+  img {
+    float: right;
+    margin-left: $spacing-half;
+  }
+
+  .description {
+    // TODO: variable
+    font-size: $font-size-small;
+  }
+}
+
+// === Image ===
+
+.imageList {
+  margin-bottom: $spacing-default;
+
+  .imageItems {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .main & {
+    .imageItem {
+      height: 125px;
+    }
+  }
+
+  .sidebar & {
+    margin-top: -$spacing-half;
+
+    .sectionTitle {
+      display: none;
+    }
+  }
+}
+
+.imageItem {
+  height: 100px;
+  flex-grow: 1;
+
+  img {
+    max-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+}
+
+// === Place ===
+
+.placeList {
+  border: $border-width solid #eee;
+  border-radius: $border-radius;
+  margin: $spacing-default $spacing-half;
+  overflow: hidden;
+
+  .sidebar & {
+    border: 0;
+    border-radius: 0;
+    margin: -$spacing-default 0 0 0;
+  }
+
+  .placeListMap {
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .placeItem {
+    border-top: $border-width solid #eee;
+    padding: $spacing-half;
+
+    .position {
+      padding-top: 1px;
+      position: absolute;
+    }
+
+    .name, .telephone, .address {
+      margin-left: $spacing-default;
+    }
+
+    .telephone, .address {
+      font-size: $font-size-small;
+    }
+  }
+}
+
+// === Related Search ===
+
+.relatedSearchList {
+  margin-bottom: $spacing-default;
+}
+
+.relatedSearchItem {
+  border-bottom: $border-width solid #eee;
+  font-size: $font-size-small;
+  padding: $spacing-half;
+
+  &:last-child {
+    border: 0;
+  }
+}
+
+// === Results Section ===
+
+.resultsSection {
+  &.sidebar {
+    > .inner {
+      border: $border-width solid #eee;
+      border-radius: $border-radius;
+      overflow: hidden;
+      padding-top: $spacing-half;
+    }
+  }
+
+  @include respond-to($break-large) {
+    &.sidebar {
+      padding-left: $spacing-default;
+    }
+  }
+}
+
+.sectionTitle {
+  font-size: $font-size-large;
+  margin-bottom: $spacing-half;
+  padding-left: $spacing-half;
+
+  &.warning {
+    border: 2px solid yellow;
+    padding: $spacing-half;
+  }
+}
+
+// === Search Box ===
+
+.searchBox {
+  position: relative;
+
+  input {
+    border: $border-width solid #bbb;
+    font-size: $font-size-default;
+    padding: $spacing-half ($spacing-half - 1);
+    width: 100%;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  button {
+    background: none;
+    border: 0;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    svg {
+      fill: #888;
+    }
+  }
+
+  .suggestions {
+    background: $color-white;
+    border: 1px solid #bbb;
+    margin-top: -1px;
+    position: absolute;
+    width: 100%;
+
+    li {
+      padding: $spacing-half;
+
+      &:hover {
+        background: $color-gray-light;
+      }
+
+      &.selected {
+        background: #ddd;
+      }
+    }
+  }
+}
+
+// === Spell Check ===
+
+.spellCheck {
+  margin-top: $spacing-default;
+
+  h2 {
+    font-size: 18px;
+
+    a {
+      font-weight: bold;
+    }
+  }
+
+  h3 {
+    font-size: 14px;
+  }
+}
+
+
+// === Time Zone ===
+
+.timeZoneItem {
+  border: $border-width solid #eee;
+  border-radius: $border-radius;
+  margin-bottom: $spacing-default;
+  padding: $spacing-half;
+
+  .time {
+    font-size: 30px;
+    margin-bottom: $spacing-half;
+  }
+
+  .date, .location {
+    color: #777;
+  }
+}
+
+// === Web Page ===
+
+.webPage {
+  margin-bottom: $spacing-default;
+  padding-left: $spacing-half;
+
+  > * {
+    margin-bottom: $spacing-default / 4;
+  }
+
+  .name {
+    font-size: $font-size-large;
+  }
+
+  .displayUrl {
+    @include line-clamp(1);
+    // TODO: variable
+    color: #006621;
+  }
+
+  .snippet {
+    // TODO: variable
+    font-size: $font-size-small;
+  }
+}
