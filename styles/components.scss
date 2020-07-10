@@ -131,11 +131,14 @@
       position: absolute;
     }
 
-    .name, .telephone, .address {
+    .name,
+    .telephone,
+    .address {
       margin-left: $spacing-default;
     }
 
-    .telephone, .address {
+    .telephone,
+    .address {
       font-size: $font-size-small;
     }
   }
@@ -255,7 +258,6 @@
   }
 }
 
-
 // === Time Zone ===
 
 .timeZoneItem {
@@ -269,7 +271,8 @@
     margin-bottom: $spacing-half;
   }
 
-  .date, .location {
+  .date,
+  .location {
     color: #777;
   }
 }
@@ -297,5 +300,74 @@
   .snippet {
     // TODO: variable
     font-size: $font-size-small;
+  }
+}
+
+.wikipedia {
+  padding: 0 $spacing-half;
+
+  h3 {
+    font-size: $font-size-xlarge;
+    margin-bottom: $spacing-default;
+  }
+
+  .summary {
+    font-size: $font-size-small;
+
+    img {
+      border-radius: $border-radius / 2;
+      float: right;
+      width: 85px;
+    }
+  }
+
+  .infoBox {
+    font-size: $font-size-small;
+    margin-top: $spacing-default;
+
+    div + br {
+      display: none;
+    }
+
+    table {
+      width: 100%;
+
+      tr {
+        border-top: 1px solid #eee;
+        width: 100%;
+
+        &.mergedrow {
+          border: 0;
+
+          th,
+          td {
+            padding: 4px 4px;
+          }
+        }
+
+        th,
+        td {
+          padding: 8px 4px;
+        }
+
+        th {
+          text-align: left;
+
+          a {
+            color: inherit;
+          }
+        }
+      }
+    }
+  }
+}
+
+.simpleAnswer {
+  h3 {
+    font-size: $font-size-xlarge;
+  }
+
+  .subtitle {
+    margin-top: $spacing-half;
   }
 }

@@ -4,6 +4,9 @@ import WebPage from '../components/results/webPage';
 import Layout from '../components/layout';
 import Header from '../components/header';
 import SearchBox from '../components/searchBox';
+import ResultsSection from '../components/resultsSection';
+import AnswersSection from '../components/answersSection';
+import SupplementsSection from '../components/supplementsSection';
 
 export default function SearchPage({ q, results }) {
   return (
@@ -13,14 +16,10 @@ export default function SearchPage({ q, results }) {
       </Header>
       {results && (
         <div className="results">
+          <AnswersSection answers={results.answers} />
           <div className="columns">
-            <div className="resultsSection main">
-              <div className="webPages">
-                {results.results.map(webPage => (
-                  <WebPage {...webPage} />
-                ))}
-              </div>
-            </div>
+            <ResultsSection results={results.results} />
+            <SupplementsSection supplements={results.supplements} />
           </div>
         </div>
       )}

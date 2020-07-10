@@ -22,10 +22,10 @@ export default async (req, res) => {
   const results = await suggestAndTransform(req.query);
 
   // preache the top search suggestions
-  const topSuggestion = results[1]?.[0];
-  if (topSuggestion && topSuggestion.length <= 20) {
-    precache({ ...req.query, q: topSuggestion });
-  }
+  // const topSuggestion = results[1]?.[0];
+  // if (topSuggestion && topSuggestion.length <= 20) {
+  //   precache({ ...req.query, q: topSuggestion });
+  // }
 
   res.json(results);
 };
