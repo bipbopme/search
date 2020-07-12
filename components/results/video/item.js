@@ -1,14 +1,14 @@
-export default function VideoItem({ title, url, duration, thumbUrl, date, views, source }) {
+export default function VideoItem({ title, url, duration, thumbUrl, views, source }) {
   return (
     <div className="videoItem card">
-      <div className="thumbnail">
-        <img src={thumbUrl} />
+      <div className="thumbnail" style={{ backgroundImage: `url(${thumbUrl})` }}>
+        <div class="label duration">{duration}</div>
       </div>
       <div className="info">
         <h4 className="name">
           <a href={url}>{title}</a>
         </h4>
-        {views && <div className="views">{views}</div>}
+        {views && <div className="views">{views.toLocaleString()} views</div>}
         <div className="source">{source}</div>
       </div>
     </div>
