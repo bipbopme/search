@@ -1,12 +1,28 @@
-export default function Wikpedia({ title, url, summary, images, infoBox }) {
+export default function Wikpedia({
+  title,
+  url,
+  summary,
+  images,
+  infoBox,
+  infoBoxPreview,
+  source,
+  sourceIconUrl
+}) {
   return (
     <div className="supplement wikipedia">
       <h3 className="title">{title}</h3>
       <div className="summary">
-        {!!images?.length && <img src={images[0]} />}
+        {images[0] && <img src={images[0]} />}
         {summary}
       </div>
-      <div className="infoBox" dangerouslySetInnerHTML={{ __html: infoBox }}></div>
+      <div class="source">
+        <a href={url}>
+          <img src={sourceIconUrl} width="16" height="16" /> More from {source}
+        </a>
+      </div>
+      {infoBoxPreview && (
+        <div className="infoBox" dangerouslySetInnerHTML={{ __html: infoBoxPreview }}></div>
+      )}
     </div>
   );
 }

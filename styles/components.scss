@@ -318,6 +318,7 @@
     img {
       border-radius: $border-radius / 2;
       float: right;
+      margin: 0 0 $spacing-half $spacing-half;
       width: 85px;
     }
   }
@@ -371,17 +372,19 @@
   .subtitle {
     margin-top: $spacing-half;
   }
+}
 
-  .source {
-    font-size: $font-size-small;
-    margin-top: $spacing-half;
+// Shared
 
-    a {
-      color: #555;
-    }
+.source {
+  font-size: $font-size-small;
+  margin-top: $spacing-half;
 
-    img {
-      vertical-align: -2px;
-    }
+  a {
+    color: #555;
+  }
+
+  img {
+    vertical-align: -2px;
   }
 }
