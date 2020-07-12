@@ -1,4 +1,4 @@
-import WebPage from './results/webPage';
+import WebPage from './results/webPage/item';
 import VideoList from './results/video/list';
 
 function renderResultComponent(item) {

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { getBaseUrl } from '../lib/utils';
-import WebPage from '../components/results/webPage';
 import Layout from '../components/layout';
 import Header from '../components/header';
 import SearchBox from '../components/searchBox';
@@ -18,8 +17,8 @@ export default function SearchPage({ q, results }) {
         <div className="results">
           <AnswersSection answers={results.answers} />
           <div className="columns">
-            <ResultsSection results={results.results} />
             <SupplementsSection supplements={results.supplements} />
+            <ResultsSection results={results.results} />
           </div>
         </div>
       )}
