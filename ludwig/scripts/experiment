@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
-rm ludwig/train/intents.*
-(echo 'query,intent,slots'; awk FNR-1 $(find lib/enhancers ludwig/data -name "*intents.csv")) > ludwig/train/intents.csv
+(echo 'query,intent,slots'; awk FNR-1 $(find ludwig/data/intents -name "*.csv")) > ludwig/train/intents.csv
 ludwig experiment --experiment_name intents --output_directory ludwig/train/results --data_csv ludwig/train/intents.csv --model_definition_file ludwig/definitions/intents.yaml --skip_save_processed_input
