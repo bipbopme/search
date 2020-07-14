@@ -109,11 +109,15 @@
   margin: $spacing-default $spacing-half;
   overflow: hidden;
 
-  .sidebar & {
-    border: 0;
-    border-radius: 0;
-    margin: -$spacing-default 0 0 0;
+  &:first-child {
+    margin-top: 0;
   }
+
+  // .sidebar & {
+  //   border: 0;
+  //   border-radius: 0;
+  //   margin: -$spacing-default 0 0 0;
+  // }
 
   .placeListMap {
     img {
@@ -124,21 +128,91 @@
 
   .placeItem {
     border-top: $border-width solid #eee;
+    overflow: auto;
     padding: $spacing-half;
 
-    .position {
-      padding-top: 1px;
-      position: absolute;
+    &:hover {
+      background: $color-gray-xlight;
+      cursor: pointer;
+
+      a {
+        text-decoration: underline;
+      }
     }
 
-    .name,
-    .telephone,
-    .address {
-      margin-left: $spacing-default;
+    .image {
+      border-radius: $border-radius / 2;
+      float: right;
+      height: 80px;
+      overflow: hidden;
+      width: 80px;
+
+      img {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
     }
 
-    .telephone,
-    .address {
+    .name {
+      margin-bottom: 2px;
+
+      a {
+        color: #000;
+      }
+    }
+
+    .stars {
+      $offset: -520px;
+      $line-height: 16px;
+      background-image: url(/images/yelp-stars.png);
+      background-position: 0 $offset;
+      display: inline-block;
+      height: 16px;
+      vertical-align: -3px;
+      width: 88px;
+
+      &.rating-1 {
+        background-position: 0 ($offset - 1 * $line-height);
+      }
+
+      &.rating-1-5 {
+        background-position: 0 ($offset - 2 * $line-height);
+      }
+
+      &.rating-2 {
+        background-position: 0 ($offset - 3 * $line-height);
+      }
+
+      &.rating-2-5 {
+        background-position: 0 ($offset - 4 * $line-height);
+      }
+
+      &.rating-3 {
+        background-position: 0 ($offset - 5 * $line-height);
+      }
+
+      &.rating-3-5 {
+        background-position: 0 ($offset - 6 * $line-height);
+      }
+
+      &.rating-4 {
+        background-position: 0 ($offset - 7 * $line-height);
+      }
+
+      &.rating-4-5 {
+        background-position: 0 ($offset - 8 * $line-height);
+      }
+
+      &.rating-5 {
+        background-position: 0 ($offset - 9 * $line-height);
+      }
+    }
+
+    .rating,
+    .info,
+    .contact {
+      color: #888;
       font-size: $font-size-small;
     }
   }
@@ -231,11 +305,11 @@
       padding: $spacing-half;
 
       &:hover {
-        background: $color-gray-light;
+        background: $color-gray-xlight;
       }
 
       &.selected {
-        background: #ddd;
+        background: #eee;
       }
     }
   }
@@ -387,4 +461,11 @@
   img {
     vertical-align: -2px;
   }
+}
+
+footer.more {
+  @extend .source;
+  border-top: 1px solid #eee;
+  margin: 0;
+  padding: $spacing-half;
 }
