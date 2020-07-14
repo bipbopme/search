@@ -104,20 +104,8 @@
 // === Place ===
 
 .placeList {
-  border: $border-width solid #eee;
-  border-radius: $border-radius;
-  margin: $spacing-default $spacing-half;
-  overflow: hidden;
-
-  &:first-child {
-    margin-top: 0;
-  }
-
-  // .sidebar & {
-  //   border: 0;
-  //   border-radius: 0;
-  //   margin: -$spacing-default 0 0 0;
-  // }
+  @extend .roundedRect;
+  padding: 0;
 
   .placeListMap {
     img {
@@ -237,15 +225,6 @@
 // === Results Section ===
 
 .resultsSection {
-  &.sidebar {
-    > .inner {
-      border: $border-width solid #eee;
-      border-radius: $border-radius;
-      overflow: hidden;
-      padding-top: $spacing-half;
-    }
-  }
-
   @include respond-to($break-large) {
     &.sidebar {
       padding-left: $spacing-default;
@@ -379,7 +358,8 @@
 }
 
 .wikipedia {
-  padding: 0 $spacing-half;
+  @extend .roundedRect;
+  padding: $spacing-default $spacing-half;
 
   h3 {
     font-size: $font-size-xlarge;
@@ -449,6 +429,22 @@
 }
 
 // Shared
+.roundedRect {
+  border: $border-width solid #eee;
+  border-radius: $border-radius;
+  overflow: hidden;
+  margin-top: $spacing-default;
+  margin-bottom: $spacing-default;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  .main & {
+    margin-left: $spacing-half;
+    margin-right: $spacing-half;
+  }
+}
 
 .source {
   font-size: $font-size-small;

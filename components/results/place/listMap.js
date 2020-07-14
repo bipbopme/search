@@ -1,12 +1,12 @@
 const MAPBOX_TOKEN = process.env.MAPBOX_TOKEN;
 
-function getStaticImage(overlays) {
+function getStaticImage(overlays, width = 628, height = 200) {
   const baseUrl = 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static';
   const pins = overlays
     .map(o => `pin-s-${o.marker.label}(${o.marker.coordinates.join(',')})`)
     .join(',');
   const position = 'auto';
-  const dimensions = '628x200@2x';
+  const dimensions = `${width}x${height}@2x`;
   const params = new URLSearchParams();
 
   params.append('logo', 'false');
@@ -15,7 +15,7 @@ function getStaticImage(overlays) {
   return `${baseUrl}/${pins}/${position}/${dimensions}?${params}`;
 }
 
-function PlaceListMap({ places }) {
+function PlaceListMap({ places, width, height }) {
   const overlays = places
     .map((p, i) => {
       const { latitude, longitude } = p.coordinates;
@@ -30,7 +30,7 @@ function PlaceListMap({ places }) {
     // Makes #1 the top layer
     .reverse();
 
-  const url = getStaticImage(overlays);
+  const url = getStaticImage(overlays, width, height);
 
   return (
     <div className="placeListMap">
