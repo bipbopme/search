@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "next",
+    "build": "yarn run geodb && next build",
+    "start": "next start",
+    "geodb": "node scripts/updateGeoDB.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
+    "dotenv": "^8.2.0",
+    "geoip-lite": "^1.4.2",
     "lodash": "^4.17.19",
     "next": "9.4.4",
     "prettier": "2.0.5",

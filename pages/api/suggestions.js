@@ -1,6 +1,7 @@
 import { memoize } from '../../lib/redis';
 import { precache } from '../../lib/search';
 import { suggestions } from '../../lib/bing';
+import { getGeo } from '../../lib/geo';
 
 const suggestAndTransform = memoize(async params => {
   const response = await suggestions(params);
@@ -19,7 +20,9 @@ const suggestAndTransform = memoize(async params => {
 }, 'suggestAndTransform-v1');
 
 export default async (req, res) => {
-  const results = await suggestAndTransform(req.query);
+  const ip = process.env.GEOIP_OVERRIDE || req.headers['x-real-ip'];
+  const geo = getGeo(ip);
+  const results = await suggestAndTransform({ mkt: geo.market, ...req.query });
 
   // preache the top search suggestions
   // const topSuggestion = results[1]?.[0];
