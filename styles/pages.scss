@@ -126,7 +126,7 @@
     .top {
       border-bottom: 1px solid #eee;
       margin-bottom: $spacing-default;
-      padding: $spacing-default $spacing-half;
+      padding: 0 $spacing-half $spacing-default $spacing-half;
 
       .inner {
         display: flex;
