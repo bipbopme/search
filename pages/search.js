@@ -1,14 +1,22 @@
 import axios from 'axios';
-import { getBaseUrl } from '../lib/utils';
 import Layout from '../components/layout';
 import Header from '../components/header';
 import SearchBox from '../components/searchBox';
 import ResultsSection from '../components/resultsSection';
 import AnswersSection from '../components/answersSection';
 import SupplementsSection from '../components/supplementsSection';
-import SpellCheck from '../components/spellCheck';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
-export default function SearchPage({ q, response }) {
+const fetcher = (url, q) => axios.get(url, { params: { q } }).then(res => res.data);
+
+export default function SearchPage() {
+  const router = useRouter();
+  let { q } = router.query;
+  const { data: response } = useSWR(q ? ['/api/search', q] : null, fetcher, {
+    revalidateOnFocus: false
+  });
+
   return (
     <Layout className="searchPage" title={`${q || ''} - bipbop`}>
       <Header>
@@ -30,14 +38,4 @@ export default function SearchPage({ q, response }) {
       )}
     </Layout>
   );
-}
-
-export async function getServerSideProps({ req, query }) {
-  const response = await axios({
-    baseURL: getBaseUrl(req),
-    url: '/api/search',
-    params: query
-  });
-
-  return { props: { response: response.data, q: query.q } };
 }
