@@ -90,7 +90,7 @@ header {
     padding: $spacing-half;
 
     .name {
-      @include line-clamp(4);
+      @include line-clamp(3);
       margin-bottom: auto;
     }
 
