@@ -5,6 +5,12 @@ function Layout({ title, className, children }) {
     <div className={className}>
       <Head>
         <title>{title}</title>
+        <link
+          rel="search"
+          title="bipbop"
+          type="application/opensearchdescription+xml"
+          href="/api/opensearch"
+        />
       </Head>
       {children}
     </div>
