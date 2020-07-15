@@ -360,7 +360,10 @@
 
 .wikipedia {
   @extend .roundedRect;
-  padding: $spacing-default $spacing-half;
+
+  .content {
+    padding: $spacing-default $spacing-half;
+  }
 
   h3 {
     font-size: $font-size-xlarge;
@@ -453,10 +456,11 @@
 
   a {
     color: #555;
+    cursor: pointer;
   }
 
   img {
-    vertical-align: -2px;
+    vertical-align: -3px;
   }
 }
 
