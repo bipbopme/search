@@ -3,7 +3,7 @@ import { precache } from '../../lib/search';
 import { suggestions } from '../../lib/bing';
 import { getGeo } from '../../lib/geo';
 
-const suggestAndTransform = memoize(async params => {
+async function suggestAndTransform(params) {
   const response = await suggestions(params);
 
   let results = [];
@@ -17,12 +17,14 @@ const suggestAndTransform = memoize(async params => {
   }
 
   return results;
-}, 'suggestAndTransform-v1');
+}
+
+const suggestAndTransformCached = memoize(suggestAndTransform);
 
 export default async (req, res) => {
   const ip = process.env.GEOIP_OVERRIDE || req.headers['x-real-ip'];
   const geo = getGeo(ip);
-  const results = await suggestAndTransform({ mkt: geo.market, ...req.query });
+  const results = await suggestAndTransformCached({ mkt: geo.market, ...req.query });
 
   // preache the top search suggestions
   // const topSuggestion = results[1]?.[0];
