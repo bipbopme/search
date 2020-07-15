@@ -1,6 +1,6 @@
 function format(number) {
   return number.toLocaleString(undefined, {
-    maximumFractionDigits: 2
+    maximumFractionDigits: 3
   });
 }
 
