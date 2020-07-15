@@ -14,11 +14,15 @@ export default function PlaceItem({
     window.location = url;
   }
 
+  function resizeImageUrl(imageUrl, size = 'ls') {
+    return imageUrl.replace(/o.jpg$/, `${size}.jpg`);
+  }
+
   return (
     <div className="placeItem" onClick={navigateToUrl}>
       {image_url && (
         <div className="image">
-          <img src={image_url} />
+          <img src={resizeImageUrl(image_url)} />
         </div>
       )}
       <h3 className="name">
