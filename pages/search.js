@@ -5,6 +5,7 @@ import SearchBox from '../components/searchBox';
 import ResultsSection from '../components/resultsSection';
 import AnswersSection from '../components/answersSection';
 import SupplementsSection from '../components/supplementsSection';
+import Stats from '../components/stats';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
@@ -24,11 +25,7 @@ export default function SearchPage() {
       </Header>
       {response && (
         <div className="results">
-          <div className="info">
-            <div className="stats">
-              About {response.totalEstimatedMatches.toLocaleString()} results
-            </div>
-          </div>
+          <Stats stats={response.stats} />
           <AnswersSection response={response} />
           <div className="columns">
             <SupplementsSection response={response} />
