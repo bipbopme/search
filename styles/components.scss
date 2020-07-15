@@ -297,7 +297,7 @@
 // === Spell Check ===
 
 .spellCheck {
-  margin-top: $spacing-default;
+  margin: 0 $spacing-half $spacing-default $spacing-half;
 
   h2 {
     font-size: 18px;

@@ -18,7 +18,7 @@ function renderResultComponent(supplement) {
   return renderedSupplement;
 }
 
-export default function ResultsSection({ supplements }) {
+export default function ResultsSection({ response: { supplements } }) {
   if (!supplements || supplements.length === 0) return null;
 
   return (

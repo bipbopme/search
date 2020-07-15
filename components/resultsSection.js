@@ -1,6 +1,7 @@
 import WebPage from './results/webPage/item';
 import VideoList from './results/video/list';
 import PlaceList from './results/place/list';
+import SpellCheck from './spellCheck';
 
 function renderResultComponent(item) {
   let renderedResult;
@@ -22,12 +23,11 @@ function renderResultComponent(item) {
   return renderedResult;
 }
 
-export default function ResultsSection({ results }) {
+export default function ResultsSection({ response }) {
   return (
     <div className="resultsSection main">
-      <div className="inner">
-        <div className="webPages">{results.map(item => renderResultComponent(item))}</div>
-      </div>
+      <SpellCheck queryContext={response.queryContext} />
+      <div className="inner">{response.results.map(item => renderResultComponent(item))}</div>
     </div>
   );
 }

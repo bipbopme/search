@@ -103,7 +103,6 @@
         .main {
           order: 0;
           width: $main-column-width;
-          padding-top: $spacing-half;
         }
 
         .sidebar {
@@ -115,11 +114,11 @@
     }
 
     > .info {
-      margin-bottom: $spacing-half;
+      margin-bottom: $spacing-default;
       padding-left: $spacing-half;
 
       .stats {
-        color: #ccc;
+        color: #888;
         font-size: $font-size-small;
       }
     }

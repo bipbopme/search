@@ -2,7 +2,7 @@ export default function VideoItem({ title, url, duration, thumbUrl, views, sourc
   return (
     <div className="videoItem card">
       <div className="thumbnail" style={{ backgroundImage: `url(${thumbUrl})` }}>
-        <div class="label duration">{duration}</div>
+        <div className="label duration">{duration}</div>
       </div>
       <div className="info">
         <h4 className="name">

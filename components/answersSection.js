@@ -1,6 +1,6 @@
 import SimpleAnswer from './answers/simple';
 
-export default function ResultsSection({ answers }) {
+export default function ResultsSection({ response: { answers } }) {
   if (!answers || answers.length === 0) return null;
 
   return (

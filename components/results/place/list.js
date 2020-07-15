@@ -19,7 +19,7 @@ export default function PlaceList({
           <PlaceItem key={item.id} {...item} position={i + 1} />
         ))}
       </div>
-      <footer class="more">
+      <footer className="more">
         <a href={sourceUrl}>
           <img className="icon" src={sourceIconUrl} height="16" width="16" /> More from {source}
         </a>

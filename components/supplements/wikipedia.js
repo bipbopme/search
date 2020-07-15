@@ -15,7 +15,7 @@ export default function Wikpedia({
         {images[0] && <img src={images[0]} />}
         {summary}
       </div>
-      <div class="source">
+      <div className="source">
         <a href={url}>
           <img src={sourceIconUrl} width="16" height="16" /> More from {source}
         </a>

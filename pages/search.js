@@ -6,19 +6,25 @@ import SearchBox from '../components/searchBox';
 import ResultsSection from '../components/resultsSection';
 import AnswersSection from '../components/answersSection';
 import SupplementsSection from '../components/supplementsSection';
+import SpellCheck from '../components/spellCheck';
 
-export default function SearchPage({ q, results }) {
+export default function SearchPage({ q, response }) {
   return (
     <Layout className="searchPage" title={`${q || ''} - bipbop`}>
       <Header>
         <SearchBox query={q} />
       </Header>
-      {results && (
+      {response && (
         <div className="results">
-          <AnswersSection answers={results.answers} />
+          <div className="info">
+            <div className="stats">
+              About {response.totalEstimatedMatches.toLocaleString()} results
+            </div>
+          </div>
+          <AnswersSection response={response} />
           <div className="columns">
-            <SupplementsSection supplements={results.supplements} />
-            <ResultsSection results={results.results} />
+            <SupplementsSection response={response} />
+            <ResultsSection response={response} />
           </div>
         </div>
       )}
@@ -33,5 +39,5 @@ export async function getServerSideProps({ req, query }) {
     params: query
   });
 
-  return { props: { results: response.data, q: query.q } };
+  return { props: { response: response.data, q: query.q } };
 }
