@@ -6,7 +6,7 @@ export default function IndexPage() {
   return (
     <Layout className="indexPage" title="bipbop">
       <Header>
-        <SearchBox />
+        <SearchBox placeholder="Search the web" />
         <div className="snippet">
           <div>
             Looking for free and easy video chat? Checkout{' '}
