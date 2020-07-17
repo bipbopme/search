@@ -358,6 +358,8 @@
   }
 }
 
+// === Weather ===
+
 .wikipedia {
   @extend .roundedRect;
 
@@ -432,7 +434,116 @@
   }
 }
 
-// Shared
+// === Weather ===
+
+.weatherItem {
+  @extend .roundedRect;
+  position: relative;
+
+  .location {
+    font-size: $font-size-large;
+  }
+
+  .status {
+    color: #777;
+    font-size: $font-size-small;
+  }
+
+  .current {
+    padding: $spacing-default $spacing-default $spacing-half $spacing-default;
+
+    .details {
+      margin-top: $spacing-default;
+      display: flex;
+
+      .temperature {
+        font-size: $font-size-xxlarge;
+
+        img {
+          vertical-align: -15px;
+          margin-left: -10px;
+          margin-right: 5px;
+        }
+      }
+
+      .more {
+        color: #777;
+        font-size: $font-size-small;
+        padding-top: 10px;
+      }
+
+      > div {
+        flex: 1;
+      }
+    }
+  }
+
+  .hourly {
+    .chart {
+      margin: 0 $spacing-half;
+    }
+
+    .hours {
+      display: flex;
+      margin: $spacing-half 0;
+
+      .hour {
+        flex: 1;
+        text-align: center;
+        font-size: $font-size-small;
+
+        .temp {
+          font-weight: bold;
+        }
+
+        .name {
+          color: #777;
+        }
+      }
+    }
+  }
+
+  .days {
+    border-top: 1px solid #eee;
+    display: flex;
+
+    .day {
+      padding: $spacing-default 0;
+      border-right: 1px solid #eee;
+      flex: 1;
+      text-align: center;
+
+      &:first-child {
+        background-color: $color-gray-xlight;
+      }
+
+      &:last-child {
+        border-right: 0;
+      }
+
+      .name {
+        font-size: $font-size-small;
+      }
+
+      .high {
+        font-size: $font-size-large;
+        font-weight: bold;
+        padding-bottom: 4px;
+      }
+
+      .low {
+        color: #777;
+      }
+
+      .icon {
+        padding: $spacing-half / 2 0;
+      }
+    }
+  }
+}
+
+// === Shared ===
+
 .roundedRect {
   border: $border-width solid #eee;
   border-radius: $border-radius;

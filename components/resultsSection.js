@@ -2,6 +2,7 @@ import WebPage from './results/webPage/item';
 import VideoList from './results/video/list';
 import PlaceList from './results/place/list';
 import SpellCheck from './spellCheck';
+import WeatherItem from './results/weather/item';
 
 function renderResultComponent(item) {
   let renderedResult;
@@ -15,6 +16,9 @@ function renderResultComponent(item) {
       break;
     case 'places':
       renderedResult = <PlaceList {...item} />;
+      break;
+    case 'weather':
+      renderedResult = <WeatherItem {...item} />;
       break;
     default:
       renderedResult = <h3 className="warning">Marv, you forgot about {item.type}!</h3>;
