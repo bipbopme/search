@@ -457,7 +457,10 @@
       display: flex;
 
       .temperature {
+        flex: 1;
         font-size: $font-size-xxlarge;
+        padding-right: $spacing-half;
+        white-space: nowrap;
 
         img {
           vertical-align: -15px;
@@ -466,13 +469,10 @@
       }
 
       .more {
+        flex: 1;
         color: #777;
         font-size: $font-size-small;
         padding-top: 10px;
-      }
-
-      > div {
-        flex: 1;
       }
     }
   }
