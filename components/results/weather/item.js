@@ -11,9 +11,13 @@ function getHourName(dateTime) {
   return dateTime.toFormat('h a');
 }
 
-export default function WeatherItem({ location, time, forecast: { current, daily, hourly } }) {
+export default function WeatherItem({
+  location,
+  time,
+  forecast: { current, daily, hourly, timezone }
+}) {
   const hourlySliced = hourly.slice(0, 24);
-  const now = DateTime.fromISO(time);
+  const now = DateTime.fromISO(time, { zone: timezone });
   const hourlyTemps = hourlySliced.map(h => h.temp);
   const hourlyLabels = hourlySliced.map((h, i) => i.toString());
 
