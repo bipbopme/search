@@ -2,7 +2,9 @@ import WebPage from './results/webPage/item';
 import VideoList from './results/video/list';
 import PlaceList from './results/place/list';
 import SpellCheck from './spellCheck';
-import WeatherItem from './results/weather/item';
+import dynamic from 'next/dynamic';
+
+const WeatherItem = dynamic(import('./results/weather/item'));
 
 function renderResultComponent(item) {
   let renderedResult;
