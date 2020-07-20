@@ -9,6 +9,7 @@
     "geodb": "node scripts/updateGeoDB.js"
   },
   "dependencies": {
+    "@sentry/node": "5.19.2",
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
     "cheerio": "^1.0.0-rc.3",
