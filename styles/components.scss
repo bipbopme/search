@@ -358,7 +358,7 @@
   }
 }
 
-// === Weather ===
+// === Wikipedia ===
 
 .wikipedia {
   @extend .roundedRect;
@@ -456,7 +456,7 @@
       margin-top: $spacing-default;
       display: flex;
 
-      .temperature {
+      .temp {
         flex: 1;
         font-size: $font-size-xxlarge;
         padding-right: $spacing-half;
@@ -465,6 +465,11 @@
         img {
           vertical-align: -15px;
           margin-right: 8px;
+        }
+
+        .scale {
+          font-size: $font-size-default;
+          vertical-align: 23px;
         }
       }
 
