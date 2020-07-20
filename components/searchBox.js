@@ -29,6 +29,13 @@ class SearchBox extends React.Component {
     };
   }
 
+  componentDidMount() {
+    // The autofocus attribute doesn't work reliably therefore this...
+    if (this.props.autoFocus) {
+      this.inputRef.current.focus();
+    }
+  }
+
   revertToUserInput() {
     this.setState({ query: this.state.userInput, selectedSuggestionIndex: -1 });
   }
