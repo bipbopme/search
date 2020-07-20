@@ -71,6 +71,8 @@
 
     .searchBox {
       width: 100%;
+      max-width: $main-column-width;
+      margin: 0 auto;
     }
 
     @include respond-to($break-large) {
@@ -84,17 +86,20 @@
       }
 
       .searchBox {
-        width: $main-column-width;
+        margin: 0;
       }
     }
   }
 
   .results {
     margin-bottom: $spacing-default;
-    max-width: 1200px;
+    max-width: $main-column-width;
+    margin: 0 auto;
     padding: $spacing-half;
 
     @include respond-to($break-large) {
+      margin: 0;
+      max-width: 1200px;
       padding-left: $left-gutter-width;
 
       .columns {
