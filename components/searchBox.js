@@ -40,8 +40,13 @@ class SearchBox extends React.Component {
     this.setState({ query: this.state.userInput, selectedSuggestionIndex: -1 });
   }
 
-  resetSuggestions() {
-    this.setState({ suggestions: [], selectedSuggestionIndex: -1, showSuggestions: false });
+  reset() {
+    this.setState({
+      suggestions: [],
+      selectedSuggestionIndex: -1,
+      showSuggestions: false,
+      query: null
+    });
   }
 
   selectSuggestion(index) {
@@ -133,7 +138,7 @@ class SearchBox extends React.Component {
   }
 
   pushRoute(q) {
-    this.resetSuggestions();
+    this.reset();
 
     Router.push({ pathname: '/search', query: { q: q } });
   }
