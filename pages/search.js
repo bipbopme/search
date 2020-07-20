@@ -15,7 +15,8 @@ export default function SearchPage() {
   const router = useRouter();
   let { q } = router.query;
   const { data: response } = useSWR(q ? ['/api/search', q] : null, fetcher, {
-    revalidateOnFocus: false
+    revalidateOnFocus: false,
+    shouldRetryOnError: false
   });
 
   return (
