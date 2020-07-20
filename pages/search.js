@@ -4,7 +4,6 @@ import Header from '../components/header';
 import SearchBox from '../components/searchBox';
 import ResultsSection from '../components/resultsSection';
 import AnswersSection from '../components/answersSection';
-import SupplementsSection from '../components/supplementsSection';
 import Stats from '../components/stats';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
@@ -28,10 +27,7 @@ export default function SearchPage() {
         <div className="results">
           <Stats stats={response.stats} />
           <AnswersSection response={response} />
-          <div className="columns">
-            <SupplementsSection response={response} />
-            <ResultsSection response={response} />
-          </div>
+          <ResultsSection response={response} />
         </div>
       )}
     </Layout>

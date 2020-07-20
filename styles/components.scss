@@ -225,14 +225,6 @@
 
 // === Results Section ===
 
-.resultsSection {
-  @include respond-to($break-large) {
-    &.sidebar {
-      padding-left: $spacing-default;
-    }
-  }
-}
-
 .sectionTitle {
   font-size: $font-size-large;
   margin-bottom: $spacing-half;

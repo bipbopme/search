@@ -1,3 +1,4 @@
+import SupplementsSection from './supplementsSection';
 import WebPage from './results/webPage/item';
 import VideoList from './results/video/list';
 import PlaceList from './results/place/list';
@@ -30,10 +31,22 @@ function renderResultComponent(item) {
 }
 
 export default function ResultsSection({ response }) {
+  let navigationalResult;
+
+  if (response.results[0]?.isNavigational) {
+    navigationalResult = response.results.shift();
+  }
+
   return (
     <div className="resultsSection main">
-      <SpellCheck queryContext={response.queryContext} />
-      <div className="inner">{response.results.map(item => renderResultComponent(item))}</div>
+      <div className="resultsGroup">
+        <SpellCheck queryContext={response.queryContext} />
+        {navigationalResult && renderResultComponent(navigationalResult)}
+      </div>
+      <SupplementsSection response={response} />
+      <div className="resultsGroup">
+        {response.results.map(item => renderResultComponent(item))}
+      </div>
     </div>
   );
 }

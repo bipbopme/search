@@ -56,7 +56,7 @@
 }
 
 .searchPage {
-  $left-gutter-width: 150px;
+  $left-gutter-width: 132px;
   $main-column-width: 650px;
 
   header {
@@ -93,27 +93,29 @@
 
   .results {
     margin-bottom: $spacing-default;
-    max-width: $main-column-width;
+    max-width: $main-column-width + $spacing-default;
     margin: 0 auto;
     padding: $spacing-half;
 
     @include respond-to($break-large) {
       margin: 0;
-      max-width: 1200px;
+      max-width: none;
       padding-left: $left-gutter-width;
+      width: 1200px;
 
-      .columns {
-        display: flex;
+      .main {
+        position: relative;
 
-        .main {
-          order: 0;
+        .resultsGroup {
           width: $main-column-width;
         }
 
-        .sidebar {
-          flex: 1;
-          margin-top: 0;
-          order: 1;
+        .supplements {
+          padding-left: $spacing-default;
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 395px;
         }
       }
     }

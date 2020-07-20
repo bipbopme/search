@@ -22,10 +22,8 @@ export default function ResultsSection({ response: { supplements } }) {
   if (!supplements || supplements.length === 0) return null;
 
   return (
-    <div className="resultsSection sidebar">
-      <div className="inner">
-        {supplements.map(supplement => renderResultComponent(supplement))}
-      </div>
+    <div className="resultsSection supplements">
+      {supplements.map(supplement => renderResultComponent(supplement))}
     </div>
   );
 }
