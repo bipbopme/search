@@ -6,7 +6,7 @@ export default function WeatherDaily({ daily, startTime }) {
       {daily.map((day, i) => (
         <div className="day">
           <div className="name">
-            {startTime.plus({ days: i }).toLocaleString({ hour: 'numeric' })}
+            {startTime.plus({ days: i }).toLocaleString({ weekday: 'short' })}
           </div>
           <div className="icon">
             <img src={`/images/icons/weather/${day.weather[0].icon}.svg`} height="32" width="32" />
