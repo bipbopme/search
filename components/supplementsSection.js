@@ -6,10 +6,10 @@ function renderResultComponent(supplement) {
 
   switch (supplement.type) {
     case 'wikipedia':
-      renderedSupplement = <Wikipedia {...supplement} />;
+      renderedSupplement = <Wikipedia key={supplement.id} {...supplement} />;
       break;
     case 'places':
-      renderedSupplement = <PlacesSupplement {...supplement} />;
+      renderedSupplement = <PlacesSupplement key={supplement.id} {...supplement} />;
       break;
     default:
       renderedSupplement = <h3 className="warning">Marv, you forgot about {supplement.type}!</h3>;

@@ -7,7 +7,7 @@ export default function ResultsSection({ response: { answers } }) {
     <div className="resultsSection top">
       <div className="inner">
         {answers.map(answer => (
-          <SimpleAnswer {...answer} />
+          <SimpleAnswer key={answer.id} {...answer} />
         ))}
       </div>
     </div>

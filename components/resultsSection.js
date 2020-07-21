@@ -12,16 +12,16 @@ function renderResultComponent(item) {
 
   switch (item.type) {
     case 'webPage':
-      renderedResult = <WebPage {...item} />;
+      renderedResult = <WebPage key={item.id} {...item} />;
       break;
     case 'videos':
-      renderedResult = <VideoList {...item} />;
+      renderedResult = <VideoList key={item.id} {...item} />;
       break;
     case 'places':
-      renderedResult = <PlaceList {...item} />;
+      renderedResult = <PlaceList key={item.id} {...item} />;
       break;
     case 'weather':
-      renderedResult = <WeatherItem {...item} />;
+      renderedResult = <WeatherItem key={item.id} {...item} />;
       break;
     default:
       renderedResult = <h3 className="warning">Marv, you forgot about {item.type}!</h3>;
