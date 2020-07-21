@@ -40,7 +40,7 @@ export default function PlaceItem({
         {categories.map(c => c.title).join(', ')}
       </div>
       <div className="contact">
-        {location.address1 && `${location.address1}  · `} {display_phone}
+        {location.address1 && `${location.address1},`} {location.city}
       </div>
     </div>
   );
