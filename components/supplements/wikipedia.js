@@ -30,7 +30,9 @@ export default function Wikpedia({
     <div className="supplement wikipedia">
       <InlineImageGrid images={relatedImages} showLead={true} perRow={2} />
       <div className="content">
-        <h3 className="title">{title}</h3>
+        <h3 className="title">
+          <a href={url}>{title}</a>
+        </h3>
         <div className="summary">
           {!relatedImages && images[0] && <img src={images[0]} />}
           {collapsed ? truncate(summary) : summary}

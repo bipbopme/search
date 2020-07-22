@@ -361,7 +361,12 @@
 
   h3 {
     font-size: $font-size-xlarge;
+    line-height: 1em;
     margin-bottom: $spacing-default;
+
+    a {
+      color: inherit;
+    }
   }
 
   .summary {
