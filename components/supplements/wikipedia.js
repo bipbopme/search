@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import InlineImageGrid from '../shared/inlineImageGrid';
 
 function truncate(text, length = 350) {
   if (text.length > length) {
@@ -16,7 +17,8 @@ export default function Wikpedia({
   infoBox,
   infoBoxPreview,
   source,
-  sourceIconUrl
+  sourceIconUrl,
+  relatedImages
 }) {
   const [collapsed, setCollapsed] = useState(true);
 
@@ -26,10 +28,11 @@ export default function Wikpedia({
 
   return (
     <div className="supplement wikipedia">
+      <InlineImageGrid images={relatedImages} showLead={true} perRow={2} />
       <div className="content">
         <h3 className="title">{title}</h3>
         <div className="summary">
-          {images[0] && <img src={images[0]} />}
+          {!relatedImages && images[0] && <img src={images[0]} />}
           {collapsed ? truncate(summary) : summary}
         </div>
         <div className="source">
