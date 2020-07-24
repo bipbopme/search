@@ -69,23 +69,9 @@
 .imageList {
   margin-bottom: $spacing-default;
 
-  .imageItems {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .main & {
-    .imageItem {
-      height: 125px;
-    }
-  }
-
-  .sidebar & {
-    margin-top: -$spacing-half;
-
-    .sectionTitle {
-      display: none;
-    }
+  .inlineImageGrid {
+    border-radius: $border-radius;
+    overflow: hidden;
   }
 }
 
@@ -616,6 +602,12 @@ footer.more {
   flex: 1 1 auto;
   margin-bottom: 1px;
   margin-right: 1px;
+
+  &.portrait {
+    img {
+      object-position: 50% 30%;
+    }
+  }
 
   img {
     object-fit: cover;

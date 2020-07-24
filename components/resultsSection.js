@@ -3,6 +3,7 @@ import WebPage from './results/webPage/item';
 import VideoList from './results/video/list';
 import PlaceList from './results/place/list';
 import SpellCheck from './spellCheck';
+import ImageList from './results/image/list';
 import dynamic from 'next/dynamic';
 
 const WeatherItem = dynamic(import('./results/weather/item'));
@@ -22,6 +23,9 @@ function renderResultComponent(item) {
       break;
     case 'weather':
       renderedResult = <WeatherItem key={item.id} {...item} />;
+      break;
+    case 'images':
+      renderedResult = <ImageList key={item.id} {...item} />;
       break;
     default:
       renderedResult = <h3 className="warning">Marv, you forgot about {item.type}!</h3>;
