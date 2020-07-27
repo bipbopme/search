@@ -46,6 +46,7 @@ export default function SearchPage() {
 
   if (response) {
     images = response.results.map(result => ({
+      src: result.thumbnailUrl,
       height: result.thumbnail.height,
       width: result.thumbnail.width,
       result

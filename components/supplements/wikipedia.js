@@ -28,7 +28,7 @@ export default function Wikpedia({
 
   return (
     <div className="supplement wikipedia">
-      <InlineImageGrid images={relatedImages} showLead={true} perRow={2} />
+      <InlineImageGrid images={relatedImages} showLead={true} perRow={2} query={title} />
       <div className="content">
         <h3 className="title">
           <a href={url}>{title}</a>
