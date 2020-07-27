@@ -22,6 +22,7 @@
     "react": "16.13.1",
     "react-chartjs-2": "^2.9.0",
     "react-dom": "16.13.1",
+    "react-photo-gallery": "^8.0.0",
     "redis": "^3.0.2",
     "sanitize-html": "^1.27.0",
     "sass": "^1.26.10",

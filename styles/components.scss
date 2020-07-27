@@ -615,3 +615,29 @@ footer.more {
     max-height: 100%;
   }
 }
+
+.imageResultsItem {
+  color: #444;
+  font-size: $font-size-xsmall;
+  padding-bottom: $spacing-half / 2;
+
+  .image {
+    background-size: contain;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+    display: block;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  h4 {
+    @include line-clamp(1);
+    margin: 4px 4px 0 4px;
+  }
+
+  .host {
+    color: #999;
+    margin: 0 4px;
+  }
+}

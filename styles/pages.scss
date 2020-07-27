@@ -55,7 +55,8 @@
   }
 }
 
-.searchPage {
+.searchPage,
+.imageSearchPage {
   $left-gutter-width: 132px;
   $main-column-width: 650px;
 
@@ -143,5 +144,13 @@
     .sidebar {
       margin: $spacing-default 0;
     }
+  }
+}
+
+.imageSearchPage {
+  .results {
+    max-width: none;
+    padding: $spacing-half;
+    width: auto;
   }
 }

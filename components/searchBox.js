@@ -140,7 +140,7 @@ class SearchBox extends React.Component {
   pushRoute(q) {
     this.reset();
 
-    Router.push({ pathname: '/search', query: { q: q } });
+    Router.push({ pathname: this.props.path || '/search', query: { q: q } });
   }
 
   render() {
