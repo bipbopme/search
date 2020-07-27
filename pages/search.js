@@ -7,6 +7,7 @@ import AnswersSection from '../components/answersSection';
 import Stats from '../components/stats';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import Navigation from '../components/navigation';
 
 const fetcher = (url, q) => axios.get(url, { params: { q } }).then(res => res.data);
 
@@ -22,6 +23,7 @@ export default function SearchPage() {
     <Layout className="searchPage" title={`${q || ''} - bipbop`}>
       <Header>
         <SearchBox query={q} />
+        <Navigation query={q} selected="all" />
       </Header>
       {response && (
         <div className="results">

@@ -8,7 +8,7 @@ export default function Header({ children }) {
           <a>bipbop</a>
         </Link>
       </h1>
-      {children}
+      <div className="controls">{children}</div>
     </header>
   );
 }

@@ -6,11 +6,9 @@ function format(number) {
 
 export default function Stats({ stats }) {
   return (
-    <div className="info">
-      <div className="stats">
-        About {stats.totalEstimatedMatches.toLocaleString()} results (
-        {format(stats.totalTime / 1000)} seconds)
-      </div>
+    <div className="stats">
+      About {stats.totalEstimatedMatches.toLocaleString()} results ({format(stats.totalTime / 1000)}{' '}
+      seconds)
     </div>
   );
 }

@@ -63,22 +63,25 @@
   header {
     background: $color-gray-light;
     border-bottom: $border-width solid #e9e9e9;
-    padding: $spacing-half;
+    padding: $spacing-half $spacing-half 0 $spacing-half;
 
     h1 {
       padding: $spacing-half 0 $spacing-default 0;
       text-align: center;
     }
 
-    .searchBox {
-      width: 100%;
+    .controls {
       max-width: $main-column-width;
       margin: 0 auto;
     }
 
+    .searchBox {
+      width: 100%;
+    }
+
     @include respond-to($break-large) {
       display: flex;
-      padding: $spacing-default 0;
+      padding-top: $spacing-default;
 
       h1 {
         padding: 8px 0 0 $spacing-default;
@@ -86,7 +89,8 @@
         width: $left-gutter-width;
       }
 
-      .searchBox {
+      .controls {
+        flex: 1;
         margin: 0;
       }
     }
@@ -118,16 +122,6 @@
           top: 0;
           width: 395px;
         }
-      }
-    }
-
-    > .info {
-      margin-bottom: $spacing-default;
-      padding-left: $spacing-half;
-
-      .stats {
-        color: #888;
-        font-size: $font-size-small;
       }
     }
 
