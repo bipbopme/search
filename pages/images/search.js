@@ -30,9 +30,9 @@ function ResultImage({ photo, margin }) {
       <h4 className="name" title={result.name}>
         <a href={result.hostPageUrl}>{result.name}</a>
       </h4>
-      <div className="host">
-        <a href={result.hostPageUrl}>{host}</a>
-      </div>
+      <a className="host" href={result.hostPageUrl}>
+        {host}
+      </a>
     </div>
   );
 }
