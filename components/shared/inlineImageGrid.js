@@ -1,22 +1,34 @@
 import chunk from 'lodash/chunk';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function getWidth(height, originalHeight, originalWidth) {
   return height * (originalWidth / originalHeight);
 }
 
 function GridImage({ image, height = 100 }) {
-  const [hovered, setHovered] = useState(false);
+  const [src, setSrc] = useState(image.src);
+
+  useEffect(() => {
+    if (image.animatedSrc) {
+      const animatedImage = new Image();
+      animatedImage.addEventListener('load', () => setSrc(image.animatedSrc), { once: true });
+      animatedImage.src = image.animatedSrc;
+    }
+  }, []);
+
+  function handleImageError() {
+    if (image.animatedSrc) {
+      setSrc(image.src);
+    }
+  }
 
   return (
     <div
       className={'gridImage ' + (image.height > image.width ? 'portrait' : 'landscape')}
       style={{ height: `${height}px`, width: `${getWidth(height, image.height, image.width)}px` }}
-      onMouseOver={() => setHovered(true)}
-      onMouseOut={() => setHovered(false)}
     >
       <a href={image.url}>
-        {hovered && image.hoverSrc ? <img {...image} src={image.hoverSrc} /> : <img {...image} />}
+        <img {...image} src={src} onError={handleImageError} />
       </a>
     </div>
   );
@@ -24,6 +36,7 @@ function GridImage({ image, height = 100 }) {
 
 export default function InlineImageGrid({
   images,
+  query,
   showLead = false,
   rows = 2,
   perRow = 4,
@@ -38,7 +51,7 @@ export default function InlineImageGrid({
 
   const gridImages = images.slice(0, count).map(i => ({
     src: i.thumbnailUrl,
-    hoverSrc: i.encodingFormat === 'animatedgif' ? i.proxyContentUrl : null,
+    animatedSrc: i.encodingFormat === 'animatedgif' ? i.proxyContentUrl : null,
     height: i.thumbnail.height,
     width: i.thumbnail.width,
     url: i.contentUrl
@@ -56,7 +69,7 @@ export default function InlineImageGrid({
     <div className={`inlineImageGrid ${showLead ? 'showLead' : 'hideLead'}`}>
       {showLead && (
         <div className="lead">
-          <GridImage image={leadImage} height={rowHeight * rows + 1} />
+          <GridImage image={leadImage} height={rowHeight * rows + 2} />
         </div>
       )}
       <div className="rows">
@@ -68,6 +81,17 @@ export default function InlineImageGrid({
           </div>
         ))}
       </div>
+      {query && (
+        <div className="moreImages">
+          <a href={`/images/search?q=${encodeURIComponent(query)}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path d="M20 5H4v14l9.292-9.294a1 1 0 0 1 1.414 0L20 15.01V5zM2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM8 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
+            </svg>
+            More images
+          </a>
+        </div>
+      )}
     </div>
   );
 }
