@@ -2,7 +2,6 @@ import axios from 'axios';
 import Layout from '../../components/layout';
 import Header from '../../components/header';
 import SearchBox from '../../components/searchBox';
-import Stats from '../../components/stats';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Gallery from 'react-photo-gallery';
@@ -13,6 +12,8 @@ const fetcher = (url, q) => axios.get(url, { params: { q } }).then(res => res.da
 function ResultImage({ photo, margin }) {
   const result = photo.result;
   const host = new URL(result.hostPageUrl).host.replace(/^www./, '');
+  const src =
+    result.encodingFormat === 'animatedgif' ? result.proxyContentUrl : result.thumbnailUrl;
 
   return (
     <div className="imageResultsItem" style={{ margin: margin, width: photo.width }}>
@@ -20,7 +21,8 @@ function ResultImage({ photo, margin }) {
         className="image"
         href={result.contentUrl}
         style={{
-          backgroundImage: `url(${result.thumbnailUrl})`,
+          backgroundColor: `#${result.accentColor}`,
+          backgroundImage: `url(${src})`,
           height: photo.height,
           width: photo.width
         }}
