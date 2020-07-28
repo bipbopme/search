@@ -28,7 +28,7 @@ function GridImage({ image, height = 100 }) {
       style={{ height: `${height}px`, width: `${getWidth(height, image.height, image.width)}px` }}
     >
       <a href={image.url}>
-        <img {...image} src={src} onError={handleImageError} />
+        <img src={src} height={image.height} width={image.width} onError={handleImageError} />
       </a>
     </div>
   );
