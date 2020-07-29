@@ -655,6 +655,54 @@
   }
 }
 
+// === Wirecutter ===
+
+.wirecutterList {
+  position: relative;
+
+  > .source {
+    margin: 0 0 $spacing-half $spacing-half;
+
+    @include respond-to($break-large) {
+      margin: 0 $spacing-half;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+}
+
+.wirecutterItem {
+  .label {
+    font-size: large;
+  }
+
+  img {
+    height: auto;
+    margin: $spacing-half 0;
+    width: 100%;
+  }
+
+  .name {
+    margin: $spacing-half 0;
+
+    a {
+      @include line-clamp(2);
+    }
+  }
+
+  .summary {
+    @include line-clamp(2);
+    font-weight: bold;
+    margin: $spacing-half / 2 0;
+  }
+
+  .description {
+    @include line-clamp(6);
+    font-size: $font-size-small;
+  }
+}
+
 // === Shared ===
 
 .roundedRect {

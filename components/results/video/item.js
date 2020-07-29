@@ -8,6 +8,8 @@ export default function VideoItem({ title, url, duration, thumbUrl, views, sourc
         <h4 className="name">
           <a href={url}>{title}</a>
         </h4>
+      </div>
+      <div className="footer">
         {views && <div className="views">{views.toLocaleString()} views</div>}
         <div className="source">{source}</div>
       </div>

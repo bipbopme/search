@@ -59,6 +59,8 @@ header {
 .card {
   border: $border-width solid #eee;
   border-radius: $border-radius;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   flex-basis: 0;
   flex-grow: 1;
@@ -84,27 +86,34 @@ header {
   }
 
   .info {
-    display: flex;
-    flex-direction: column;
-    height: 140px;
+    flex: 1;
     padding: $spacing-half;
+  }
 
-    .name {
-      @include line-clamp(3);
-      margin-bottom: auto;
-    }
+  .footer {
+    padding: 0 $spacing-half $spacing-half;
+  }
 
-    .views,
-    .source {
-      font-size: $font-size-small;
-    }
+  .name {
+    @include line-clamp(3);
+    margin-bottom: auto;
+  }
 
-    .views {
-      color: #888;
-    }
+  .views,
+  .source {
+    font-size: $font-size-small;
+    margin: 0;
+  }
 
-    .source {
-      color: #006621;
+  .views {
+    color: #888;
+  }
+
+  .source {
+    color: #006621;
+
+    a {
+      color: inherit;
     }
   }
 
@@ -119,7 +128,7 @@ header {
 
   @include respond-to($break-medium) {
     &:nth-child(n + 3) {
-      display: block;
+      display: flex;
     }
 
     &:nth-child(2) {
