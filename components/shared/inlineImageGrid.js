@@ -1,5 +1,6 @@
 import chunk from 'lodash/chunk';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 function getWidth(height, originalHeight, originalWidth) {
   return height * (originalWidth / originalHeight);
@@ -83,13 +84,15 @@ export default function InlineImageGrid({
       </div>
       {query && (
         <div className="moreImages">
-          <a href={`/images/search?q=${encodeURIComponent(query)}`}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
-              <path fill="none" d="M0 0h24v24H0z" />
-              <path d="M20 5H4v14l9.292-9.294a1 1 0 0 1 1.414 0L20 15.01V5zM2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM8 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
-            </svg>
-            More images
-          </a>
+          <Link href={`/images/search?q=${encodeURIComponent(query)}`}>
+            <a>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M20 5H4v14l9.292-9.294a1 1 0 0 1 1.414 0L20 15.01V5zM2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM8 11a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
+              </svg>
+              More images
+            </a>
+          </Link>
         </div>
       )}
     </div>
