@@ -99,12 +99,14 @@ header {
     margin-bottom: auto;
   }
 
+  .date,
   .views,
   .source {
     font-size: $font-size-small;
     margin: 0;
   }
 
+  .date,
   .views {
     color: #888;
   }

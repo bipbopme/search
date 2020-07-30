@@ -5,6 +5,7 @@ import PlaceList from './results/place/list';
 import SpellCheck from './spellCheck';
 import ImageList from './results/image/list';
 import WirecutterList from './results/wirecutter/list';
+import NewsList from './results/news/list';
 import dynamic from 'next/dynamic';
 
 const WeatherItem = dynamic(import('./results/weather/item'));
@@ -30,6 +31,9 @@ function renderResultComponent(item) {
       break;
     case 'wirecutter':
       renderedResult = <WirecutterList key={item.id} {...item} />;
+      break;
+    case 'news':
+      renderedResult = <NewsList key={item.id} {...item} />;
       break;
     default:
       renderedResult = <h3 className="warning">Marv, you forgot about {item.type}!</h3>;
