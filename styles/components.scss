@@ -390,6 +390,16 @@
   margin-bottom: $spacing-default;
   padding-left: $spacing-half;
 
+  &.isNavigational {
+    border-bottom: 1px solid #eee;
+    padding-bottom: $spacing-half;
+
+    .logo {
+      margin-right: 5px;
+      vertical-align: -1px;
+    }
+  }
+
   > * {
     margin-bottom: $spacing-default / 4;
   }
@@ -407,6 +417,26 @@
   .snippet {
     // TODO: variable
     font-size: $font-size-small;
+  }
+
+  .deepLinks {
+    display: flex;
+    flex-wrap: wrap;
+
+    @include respond-to($break-large) {
+      padding: $spacing-half $spacing-half 0 $spacing-half;
+    }
+
+    .deepLink {
+      padding: $spacing-half;
+      flex: 0 0 50%;
+
+      .snippet {
+        @include line-clamp(2);
+        color: #555;
+        margin-top: $spacing-half;
+      }
+    }
   }
 }
 
@@ -433,7 +463,6 @@
     font-size: $font-size-small;
 
     img {
-      border-radius: $border-radius / 2;
       float: right;
       margin: 0 0 $spacing-half $spacing-half;
       width: 85px;
