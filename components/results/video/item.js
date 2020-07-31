@@ -10,7 +10,7 @@ export default function VideoItem({ title, url, duration, thumbUrl, views, sourc
         </h4>
       </div>
       <div className="footer">
-        {views && <div className="views">{views.toLocaleString()} views</div>}
+        {views && views > 0 ? <div className="views">{views.toLocaleString()} views</div> : null}
         <div className="source">{source}</div>
       </div>
     </div>
