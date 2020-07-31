@@ -412,6 +412,10 @@
     @include line-clamp(1);
     // TODO: variable
     color: #006621;
+
+    a {
+      color: inherit;
+    }
   }
 
   .snippet {

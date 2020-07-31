@@ -8,6 +8,10 @@ export default function webPage({ name, url, displayUrl, snippet, deepLinks, isN
     setFaviconSrc('/images/icons/checkbox-circle-line.svg');
   }
 
+  function getShortDisplayUrl() {
+    return displayUrl.replace(/^https?:\/\/(www.)?/, '');
+  }
+
   return (
     <div className={`webPage ${isNavigational ? 'isNavigational' : 'notNavigational'}`}>
       <h4 className="name">
@@ -24,9 +28,13 @@ export default function webPage({ name, url, displayUrl, snippet, deepLinks, isN
           {name}
         </a>
       </h4>
-      <div className="displayUrl">{displayUrl}</div>
+      <div className="displayUrl">
+        <a href={url} title={displayUrl}>
+          {getShortDisplayUrl()}
+        </a>
+      </div>
       <div className="snippet">{snippet}</div>
-      {isNavigational && deepLinks && (
+      {isNavigational && deepLinks && deepLinks.length >= 2 && (
         <div className="deepLinks">
           {deepLinks.map(deepLink => (
             <div className="deepLink">
