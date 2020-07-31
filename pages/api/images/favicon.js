@@ -3,9 +3,10 @@ import cheerio from 'cheerio';
 import { convertToNumber, urlJoin } from '../../../lib/utils';
 
 export default async (req, res) => {
+  const url = req.query.url;
   const { origin } = new URL(req.query.url);
 
-  const data = (await axios.get(origin)).data;
+  const data = (await axios.get(url)).data;
   const $ = cheerio.load(data);
 
   let iconUrl =
@@ -13,7 +14,7 @@ export default async (req, res) => {
     $('link[rel="icon"]').first().attr('href');
 
   if (iconUrl) {
-    iconUrl = urlJoin(origin, iconUrl);
+    iconUrl = urlJoin(url, iconUrl);
   } else {
     iconUrl = `${origin}/favicon.ico`;
   }

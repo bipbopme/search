@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
 export default function webPage({ name, url, displayUrl, snippet, deepLinks, isNavigational }) {
-  const { origin } = new URL(url);
   const [faviconSrc, setFaviconSrc] = useState(
-    `/api/images/favicon?url=${encodeURIComponent(origin)}`
+    `/api/images/favicon?url=${encodeURIComponent(url)}`
   );
 
   function handleImageError() {
