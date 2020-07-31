@@ -9,7 +9,7 @@ export default async (req, res) => {
   let iconUrl;
 
   try {
-    const data = (await axios.get(url)).data;
+    const data = (await axios.get(url), { timeout: 5 * 1000 }).data;
     const $ = cheerio.load(data);
 
     iconUrl =
@@ -31,7 +31,8 @@ export default async (req, res) => {
     const response = await axios({
       url: iconUrl,
       method: 'get',
-      responseType: 'stream'
+      responseType: 'stream',
+      timeout: 10 * 1000
     });
 
     res.on('pipe', src => {

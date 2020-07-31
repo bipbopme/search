@@ -9,7 +9,8 @@ export default async (req, res) => {
       const response = await axios({
         url,
         method: 'get',
-        responseType: 'stream'
+        responseType: 'stream',
+        timeout: 20 * 1000
       });
 
       res.on('pipe', src => {
