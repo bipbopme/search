@@ -134,7 +134,7 @@ class SearchBox extends React.Component {
 
     this.inputRef.current.blur();
 
-    this.pushRoute(this.state.query);
+    this.pushRoute(this.state.query || this.props.query);
   }
 
   pushRoute(q) {
