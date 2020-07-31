@@ -43,16 +43,23 @@ function renderResultComponent(item) {
 }
 
 export default function ResultsSection({ response }) {
+  let navigationalResult, results;
+
+  if (response.results[0]?.isNavigational) {
+    navigationalResult = response.results[0];
+    results = response.results.slice(1);
+  } else {
+    results = response.results;
+  }
+
   return (
     <div className="resultsSection main">
       <div className="resultsGroup">
         <SpellCheck queryContext={response.queryContext} />
-        {response.results[0]?.isNavigational && renderResultComponent(response.results[0])}
+        {navigationalResult && renderResultComponent(navigationalResult)}
       </div>
       <SupplementsSection response={response} />
-      <div className="resultsGroup">
-        {response.results.slice(1).map(item => renderResultComponent(item))}
-      </div>
+      <div className="resultsGroup">{results.map(item => renderResultComponent(item))}</div>
     </div>
   );
 }
