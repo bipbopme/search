@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { convertToNumber, isValidParams } from '../../../lib/utils';
+import { isValidParams } from '../../../lib/utils';
 
 export default async (req, res) => {
   const url = req.query.url;
@@ -8,13 +8,17 @@ export default async (req, res) => {
     try {
       const response = await axios({
         url,
-        method: 'GET',
+        method: 'get',
         responseType: 'stream'
+      });
+
+      res.on('pipe', src => {
+        res.setHeader('Content-Type', src.headers['content-type']);
       });
 
       response.data.pipe(res);
     } catch (e) {
-      res.statusCode = convertToNumber(e.message) || 500;
+      res.statusCode = e.response?.status || 500;
       res.end(e.message);
     }
   } else {

@@ -1,34 +1,46 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
-import { convertToNumber, urlJoin } from '../../../lib/utils';
+import { urlJoin } from '../../../lib/utils';
 
 export default async (req, res) => {
   const url = req.query.url;
   const { origin } = new URL(req.query.url);
 
-  const data = (await axios.get(url)).data;
-  const $ = cheerio.load(data);
+  let iconUrl;
 
-  let iconUrl =
-    $('link[rel="shortcut icon"]').first().attr('href') ||
-    $('link[rel="icon"]').first().attr('href');
+  try {
+    const data = (await axios.get(url)).data;
+    const $ = cheerio.load(data);
 
-  if (iconUrl) {
-    iconUrl = urlJoin(url, iconUrl);
-  } else {
+    iconUrl =
+      $('link[rel="shortcut icon"]').first().attr('href') ||
+      $('link[rel="icon"]').first().attr('href');
+
+    if (iconUrl) {
+      iconUrl = urlJoin(url, iconUrl);
+    }
+  } catch (e) {
+    console.warn('Error fetching favicon HTML', e.message);
+  }
+
+  if (!iconUrl) {
     iconUrl = `${origin}/favicon.ico`;
   }
 
   try {
     const response = await axios({
       url: iconUrl,
-      method: 'GET',
+      method: 'get',
       responseType: 'stream'
+    });
+
+    res.on('pipe', src => {
+      res.setHeader('Content-Type', src.headers['content-type']);
     });
 
     response.data.pipe(res);
   } catch (e) {
-    res.statusCode = convertToNumber(e.message) || 500;
+    res.statusCode = e.response?.status || 500;
     res.end(e.message);
   }
 };
