@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
 export default function webPage({ name, url, displayUrl, snippet, deepLinks, isNavigational }) {
-  const { host } = new URL(url);
-  const [faviconSrc, setFaviconSrc] = useState(`https://${host}/favicon.ico`);
+  const { origin } = new URL(url);
+  const [faviconSrc, setFaviconSrc] = useState(
+    `/api/images/favicon?url=${encodeURIComponent(origin)}`
+  );
 
   function handleImageError() {
     setFaviconSrc('/images/icons/checkbox-circle-line.svg');
