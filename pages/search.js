@@ -27,7 +27,7 @@ export default function SearchPage() {
       </Header>
       {response && (
         <div className="results">
-          <Stats stats={response.stats} />
+          <Stats stats={response.stats} query={q} />
           <AnswersSection response={response} />
           <ResultsSection response={response} />
         </div>

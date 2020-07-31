@@ -4,11 +4,10 @@ function format(number) {
   });
 }
 
-export default function Stats({ stats }) {
+export default function Stats({ stats, query }) {
   return (
-    <div className="stats">
-      About {stats.totalEstimatedMatches.toLocaleString()} results ({format(stats.totalTime / 1000)}{' '}
-      seconds)
+    <div className="stats" title={`${format(stats.totalTime / 1000)} seconds`}>
+      About {stats.totalEstimatedMatches.toLocaleString()} results for <strong>{query}</strong>
     </div>
   );
 }

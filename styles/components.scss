@@ -643,6 +643,10 @@
   font-size: $font-size-small;
   margin-bottom: $spacing-default;
   padding-left: $spacing-half;
+
+  strong {
+    font-weight: bold;
+  }
 }
 
 // === Navigation ===
