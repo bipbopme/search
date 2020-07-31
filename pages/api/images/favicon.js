@@ -9,7 +9,7 @@ export default async (req, res) => {
   let iconUrl;
 
   try {
-    const data = (await axios.get(url), { timeout: 5 * 1000 }).data;
+    const data = (await axios.get(url, { timeout: 10 * 1000 })).data;
     const $ = cheerio.load(data);
 
     iconUrl =
