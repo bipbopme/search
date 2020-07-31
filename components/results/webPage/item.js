@@ -38,7 +38,7 @@ export default function webPage({ name, url, displayUrl, snippet, deepLinks, isN
       {isNavigational && deepLinks && deepLinks.length >= 2 && (
         <div className="deepLinks">
           {deepLinks.map(deepLink => (
-            <div className="deepLink">
+            <div className="deepLink" key={deepLink.url}>
               <div className="name">
                 <a href={deepLink.url}>{deepLink.name}</a>
               </div>
