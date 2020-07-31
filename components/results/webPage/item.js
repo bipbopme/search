@@ -9,7 +9,7 @@ export default function webPage({ name, url, displayUrl, snippet, deepLinks, isN
   }
 
   function getShortDisplayUrl() {
-    return displayUrl.replace(/^https?:\/\/(www.)?/, '');
+    return displayUrl.replace(/^https?:\/\/((www)[^\.]*\.)?/, '');
   }
 
   return (
